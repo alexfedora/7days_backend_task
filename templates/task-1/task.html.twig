@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Task{% endblock %}
+
+{% block body %}
+<style>
+    .form {
+        display: flex;
+    }
+    .form div {
+        margin-right: 10px;
+    }
+    .error {
+        color: red;
+        display: none;
+    }
+    .show {
+        display: block;
+    }
+</style>
+<form class="form" method="POST" action="{{ path('process_task') }}" enctype="multipart/form-data">
+    <div>
+        <label for="date">Date</label>
+        <input type="text" name="date" id="date" placeholder="Y-m-d" value="{{ data.date ?? null }}">
+        <p class="error {% if errors.date ?? false %} show {% endif %}">{{ errors.date ?? '' }}</p>
+    </div>
+    <div>
+        <label for="timezone">Timezone</label>
+        <input type="text" name="timezone" id="timezone" placeholder="Europe/London" value="{{ data.timezone ?? null }}">
+        <p class="error {% if errors.timezone ?? false %} show {% endif %}">{{ errors.timezone ?? '' }}</p>
+    </div>
+
+    <button style="height: 21px" type="submit">Process</button>
+</form>
+
+{% endblock %}
